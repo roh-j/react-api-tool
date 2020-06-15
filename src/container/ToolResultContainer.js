@@ -5,6 +5,7 @@ import GeneralHorizontalTable from '../components/common/GeneralHorizontalTable'
 import PaginationContainer from './PaginationContainer';
 
 const ToolBoxContainer = () => {
+  
   const { form, data, dataCount, status, navSize, viewSize, navViewSize, current, currentPage, loaded } = useSelector(({ tool }) => ({
     form: tool.form,
     data: tool.data,
@@ -17,6 +18,12 @@ const ToolBoxContainer = () => {
     currentPage: tool.paging.currentPage,
     loaded: tool.loaded,
   }))
+
+  const tableFooter = {
+    'visible': true,
+    'align': 'right',
+    'contents': 'Total: 100',
+  };
 
   if (!loaded) {
     return (
@@ -46,7 +53,7 @@ const ToolBoxContainer = () => {
                 <GeneralHorizontalTable
                   keys={Object.keys(data[0])}
                   data={data.slice(current, current + viewSize)}
-                  current={current}></GeneralHorizontalTable>
+                  footer={tableFooter}></GeneralHorizontalTable>
               </>
             )
           }
