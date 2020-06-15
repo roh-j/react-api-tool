@@ -5,9 +5,10 @@ import GeneralHorizontalTable from '../components/common/GeneralHorizontalTable'
 import PaginationContainer from './PaginationContainer';
 
 const ToolBoxContainer = () => {
-  const { form, data, status, navSize, viewSize, navViewSize, current, currentPage, loaded } = useSelector(({ tool }) => ({
+  const { form, data, dataCount, status, navSize, viewSize, navViewSize, current, currentPage, loaded } = useSelector(({ tool }) => ({
     form: tool.form,
     data: tool.data,
+    dataCount: tool.dataCount,
     status: tool.status,
     navSize: tool.paging.navSize,
     viewSize: tool.paging.viewSize,
@@ -30,32 +31,32 @@ const ToolBoxContainer = () => {
   else {
     if (status === true) {
       return (
-        form.tableType === 'vertical' ? (
-          <>
-            <GeneralVerticalTable
-              keys={Object.keys(data[0])}
-              data={data.slice(current, current + viewSize)}
-              current={current}></GeneralVerticalTable>
-            <PaginationContainer
-              navSize={navSize}
-              viewSize={viewSize}
-              navViewSize={navViewSize}
-              current={current}
-              currentPage={currentPage}></PaginationContainer>
-          </>
-        ) : form.tableType === 'horizontal' && (
-          <>
-            <GeneralHorizontalTable
-              keys={Object.keys(data[0])}
-              data={data.slice(current, current + viewSize)}
-              current={current}></GeneralHorizontalTable>
-            <PaginationContainer
-              navSize={navSize}
-              viewSize={viewSize}
-              navViewSize={navViewSize}
-              currentPage={currentPage}></PaginationContainer>
-          </>
-        )
+        <>
+          <h3>Result ({dataCount})</h3>
+          {
+            form.tableType === 'vertical' ? (
+              <>
+                <GeneralVerticalTable
+                  keys={Object.keys(data[0])}
+                  data={data.slice(current, current + viewSize)}
+                  current={current}></GeneralVerticalTable>
+              </>
+            ) : form.tableType === 'horizontal' && (
+              <>
+                <GeneralHorizontalTable
+                  keys={Object.keys(data[0])}
+                  data={data.slice(current, current + viewSize)}
+                  current={current}></GeneralHorizontalTable>
+              </>
+            )
+          }
+          <PaginationContainer
+            navSize={navSize}
+            viewSize={viewSize}
+            navViewSize={navViewSize}
+            current={current}
+            currentPage={currentPage}></PaginationContainer>
+        </>
       )
     }
     else {
