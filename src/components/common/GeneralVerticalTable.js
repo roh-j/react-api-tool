@@ -22,7 +22,7 @@ const GeneralVerticalTable = ({ keys, data, current }) => {
                   return (
                     <tr key={idx}>
                       <th scope='row'>{key}</th>
-                      <td>{JSON.stringify(ds[key])}</td>
+                      <td className='text-break'>{JSON.stringify(ds[key])}</td>
                     </tr>
                   )
                 })

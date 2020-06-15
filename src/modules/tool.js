@@ -22,7 +22,7 @@ const initialState = {
   },
   paging: {
     viewSize: 10,
-    navViewSize: 5,
+    navViewSize: 10,
     navSize: 0,
     current: 0,
     currentPage: 1,
